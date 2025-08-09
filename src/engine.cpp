@@ -1,17 +1,23 @@
-#include <void_engine/types/2D/rect.hpp>
 #include <SDL3/SDL.h>
+#include <void_engine/types/2D/rect.hpp>
 
 #include <void_engine/engine.hpp>
+
+#include <iostream>
 
 namespace voe {
 
 Engine::Engine() {
-  SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "KMSDRM");
+  //  SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "KMSDRM");
 
   if (!SDL_Init(SDL_INIT_VIDEO)) {
     SDL_Log("Couldn't initialize SDL: %s", SDL_GetError());
     std::exit(1);
   }
+
+  std::cout << SDL_GetCurrentVideoDriver() << std::endl;
+
+  SDL_HideCursor();
 
   this->window = new Window();
   this->renderer = SDL_CreateRenderer(*this->window, NULL);
@@ -38,7 +44,7 @@ void Engine::run() {
       }
     }
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 10);
     SDL_RenderClear(renderer);
 
     for (auto obj : this->objects) {

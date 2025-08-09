@@ -3,7 +3,7 @@
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
-int main() {
+int maint() {
   SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "KMSDRM");
 
   SDL_Window *window = NULL;
